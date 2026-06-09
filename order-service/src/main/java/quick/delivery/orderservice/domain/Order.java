@@ -1,20 +1,15 @@
 package quick.delivery.orderservice.domain;
 
 
-import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import quick.delivery.orderservice.global.common.Supports;
-import quick.delivery.orderservice.global.common.Supports.OrderStatus;
-import quick.delivery.orderservice.global.exception.OrderCreateException;
+import quick.delivery.common.Supports.OrderStatus;
+import quick.delivery.exception.OrderCreateException;
 
 import java.util.List;
 
-import static quick.delivery.orderservice.global.common.Supports.ErrorCode.ORDER_CREATE_VALIDATION_FAIL;
+import static quick.delivery.common.Supports.ErrorCode.*;
 
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Order {
     private Long id;
     private Long orderId;

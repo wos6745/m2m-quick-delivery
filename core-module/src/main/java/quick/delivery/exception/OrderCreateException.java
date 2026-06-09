@@ -1,8 +1,7 @@
-package quick.delivery.orderservice.global.exception;
+package quick.delivery.exception;
 
 import lombok.Getter;
-import quick.delivery.orderservice.global.common.Supports;
-import quick.delivery.orderservice.global.common.Supports.ErrorCode;
+import quick.delivery.common.Supports.ErrorCode;
 
 @Getter
 public class OrderCreateException extends RuntimeException {

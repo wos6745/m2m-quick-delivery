@@ -1,11 +1,8 @@
-package quick.delivery.orderservice.global.common;
+package quick.delivery.common;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 
 public interface Supports {
-    @RequiredArgsConstructor
     enum OrderStatus {
         WAITING(100, "주문 대기 중"),
         CANCELED_STORE(200, "매장에서 취소 하였습니다."),
@@ -19,13 +16,23 @@ public interface Supports {
 
         @Getter
         private final String statusMessage;
+
+        OrderStatus(int status, String statusMessage) {
+            this.status = status;
+            this.statusMessage = statusMessage;
+        }
     }
 
     @Getter
-    @RequiredArgsConstructor
     enum ErrorCode {
         ORDER_CREATE_VALIDATION_FAIL(10000, "validation fail");
         private final int code;
         private final String errorMessage;
+
+        ErrorCode(int code, String errorMessage) {
+            this.code = code;
+            this.errorMessage = errorMessage;
+        }
     }
 }
+
