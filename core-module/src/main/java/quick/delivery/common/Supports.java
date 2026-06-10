@@ -3,6 +3,22 @@ package quick.delivery.common;
 import lombok.Getter;
 
 public interface Supports {
+    enum ResultCode {
+
+        SUCCESS(20000, "성공"),
+        INTERNAL_SERVER_ERROR(50000, "알 수 없는 서버 에러");
+
+        @Getter
+        private final int code;
+        @Getter
+        private final String infoMessage;
+
+        ResultCode(int code, String infoMessage) {
+            this.code = code;
+            this.infoMessage = infoMessage;
+        }
+    }
+
     enum OrderStatus {
         WAITING(100, "주문 대기 중"),
         CANCELED_STORE(200, "매장에서 취소 하였습니다."),
@@ -25,7 +41,8 @@ public interface Supports {
 
     @Getter
     enum ErrorCode {
-        ORDER_CREATE_VALIDATION_FAIL(10000, "validation fail");
+        ORDER_CREATE_VALIDATION_FAIL(10000, "validation fail"),
+        ORDER_ITEM_CREATE_VALIDATION_FAIL(10001, "validation fail");
         private final int code;
         private final String errorMessage;
 

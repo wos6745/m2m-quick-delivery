@@ -1,6 +1,7 @@
 package quick.delivery.orderservice.domain;
 
 
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import quick.delivery.common.Supports.OrderStatus;
 import quick.delivery.exception.OrderCreateException;
@@ -21,6 +22,7 @@ public class Order {
     private String cancelMessage;
     private List<OrderItem> orderItemList;
 
+    @Builder
     public Order(String customerId, String customerName ,String customerAddress, String customerPhoneNumber, List<OrderItem> orderItemList) {
         validateCreateOrder(customerId, customerName, customerAddress, customerPhoneNumber, orderItemList);
 
