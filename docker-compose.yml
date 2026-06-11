@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  kafka:
+    image: apache/kafka:latest
+    container_name: local-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      # KRaft 모드 활성화 및 노드 역할 설정
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:9093'
+
+      # 리스너 설정 (외부 스프링 부트 애플리케이션이 9092 포트로 접속할 수 있게 함)
+      KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT'
+
+      # 테스트용이므로 로그 보존 기간을 짧게 설정 (디스크 절약)
+      KAFKA_LOG_RETENTION_HOURS: 1
+      KAFKA_LOG_SEGMENT_BYTES: 1073741824
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1

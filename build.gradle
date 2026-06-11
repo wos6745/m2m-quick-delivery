@@ -16,6 +16,12 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'
 
+	dependencyManagement {
+		imports {
+			mavenBom 'org.springdoc:springdoc-openapi-bom:3.0.2'
+		}
+	}
+
 	group = rootProject.group
 	version = rootProject.version
 

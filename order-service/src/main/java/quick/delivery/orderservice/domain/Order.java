@@ -14,42 +14,42 @@ import static quick.delivery.common.Supports.ErrorCode.*;
 public class Order {
     private Long id;
     private Long orderId;
-    private String customerId;
-    private String customerName;
-    private String customerAddress;
-    private String customerPhoneNumber;
+    private String userId;
+    private String deliveryAddress;
+    private String deliveryMessage;
+    private String storeMessage;
     private OrderStatus orderStatus;
     private String cancelMessage;
-    private List<OrderItem> orderItemList;
+    private List<OrderItem> orderItems;
+    private Long totalPoints;
 
     @Builder
-    public Order(String customerId, String customerName ,String customerAddress, String customerPhoneNumber, List<OrderItem> orderItemList) {
-        validateCreateOrder(customerId, customerName, customerAddress, customerPhoneNumber, orderItemList);
-
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.customerPhoneNumber = customerPhoneNumber;
-        this.orderStatus = OrderStatus.WAITING;
-        this.orderItemList = orderItemList;
+    public Order(Long id, Long orderId, String userId, String deliveryAddress, String deliveryMessage, String storeMessage, OrderStatus orderStatus, String cancelMessage, List<OrderItem> orderItems, Long totalPoints) {
+        this.id = id;
+        this.orderId = orderId;
+        this.userId = userId;
+        this.deliveryAddress = deliveryAddress;
+        this.deliveryMessage = deliveryMessage;
+        this.storeMessage = storeMessage;
+        this.orderStatus = orderStatus;
+        this.cancelMessage = cancelMessage;
+        this.orderItems = orderItems;
+        this.totalPoints = totalPoints;
     }
 
-    private void validateCreateOrder(String customerId, String customerName ,String customerAddress, String customerPhoneNumber, List<OrderItem> orderItemList) throws OrderCreateException {
-        if (customerId == null || customerId.isBlank()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "customerId is required");
-        }
-        if (customerName == null || customerName.isBlank()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "customerName is required");
+    public void validateCreateOrder() throws OrderCreateException {
+        if (userId == null || userId.isBlank()) {
+            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "userId is required");
         }
 
-        if (customerAddress == null || customerAddress.isBlank()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "customerAddress is required");
+        if (deliveryAddress == null || deliveryAddress.isBlank()) {
+            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "deliveryAddress is required");
         }
-        if (customerPhoneNumber == null || customerPhoneNumber.isBlank()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "customerPhoneNumber is required");
+        if (totalPoints == null || totalPoints == 0) {
+            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "totalPoints is zero");
         }
-        if (orderItemList == null || orderItemList.isEmpty()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "orderItemList is required");
+        if (orderItems == null || orderItems.isEmpty()) {
+            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "orderItems is required");
         }
     }
 }

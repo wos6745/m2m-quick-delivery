@@ -1,4 +1,12 @@
 package quick.delivery.orderservice.application.port.response;
 
-public record SaveOrderResponse() {
+import lombok.Builder;
+
+public record SaveOrderResponse(
+        boolean isSuccess,
+        Long orderId
+) {
+    @Builder
+    public SaveOrderResponse {
+    }
 }

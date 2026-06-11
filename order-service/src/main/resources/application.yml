@@ -1,3 +1,10 @@
+springdoc:
+  swagger-ui:
+    try-it-out-enabled: true
+    default-model-expand-depth: 2
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
 spring:
   application:
     name: order-service
@@ -22,3 +29,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: order-saga-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "quick.delivery.*" # 공통 이벤트 패키지 허용
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

@@ -1,4 +1,15 @@
 package quick.delivery.orderservice.application.port.command;
 
-public record SaveOrderItemCommand() {
+import lombok.Builder;
+
+public record SaveOrderItemCommand(
+        Long menuId,
+        Long price,
+        int count
+) {
+    @Builder
+    public SaveOrderItemCommand {
+    }
+
+
 }
