@@ -2,6 +2,7 @@ package quick.delivery.orchestratorservice.adapter.out.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import quick.delivery.common.Supports;
@@ -25,6 +26,13 @@ public class SagaInstanceEntity {
     @Column(updatable = false)
     private LocalDateTime createDateTime;
     private LocalDateTime updateDateTime;
+
+
+    @Builder
+    public SagaInstanceEntity(Long orderId, SagaProcessStatus sagaStatus) {
+        this.orderId = orderId;
+        this.sagaStatus = sagaStatus;
+    }
 
     @PrePersist
     public void prePersist() {

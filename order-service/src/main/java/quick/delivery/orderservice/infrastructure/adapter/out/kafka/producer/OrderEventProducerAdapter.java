@@ -1,4 +1,4 @@
-package quick.delivery.orderservice.infrastructure.adapter.out.producer;
+package quick.delivery.orderservice.infrastructure.adapter.out.kafka.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
