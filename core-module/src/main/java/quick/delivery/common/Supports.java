@@ -3,6 +3,31 @@ package quick.delivery.common;
 import lombok.Getter;
 
 public interface Supports {
+    enum SagaStatus {
+        INITIATED(100, "예약 접수 중 입니다."),
+        COMPLETED(200, "예약이 완료 되었습니다.");
+        @Getter
+        private final int code;
+        @Getter
+        private final String infoMessage;
+
+        SagaStatus(int code, String infoMessage) {
+            this.code = code;
+            this.infoMessage = infoMessage;
+        }
+    }
+
+    enum SagaProcessStatus {
+        INITIATED(100),
+        COMPLETED(200);
+        @Getter
+        private final int code;
+
+        SagaProcessStatus(int code) {
+            this.code = code;
+        }
+    }
+
     enum ResultCode {
 
         SUCCESS(20000, "성공"),

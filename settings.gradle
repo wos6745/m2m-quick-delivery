@@ -9,4 +9,6 @@ rootProject.name = 'm2m-quick-delivery'
 
 include 'order-service'
 include 'core-module'
+include 'orchestrator-service'
+include 'bff-service'
 
