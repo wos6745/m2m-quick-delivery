@@ -3,7 +3,8 @@ package quick.delivery.message.reply;
 import lombok.Builder;
 
 public record CreateOrderReply(
-        String orderId,
+        Long sagaId,
+        Long orderId,
         boolean status,
         String message
 ) {

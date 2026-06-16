@@ -20,4 +20,6 @@ app:
   kafka:
     topic:
       order-commands: order-commands
+    groups:
+      order-service: order-saga-group
 

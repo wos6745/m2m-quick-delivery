@@ -6,6 +6,7 @@ import quick.delivery.common.Supports.*;
 import quick.delivery.dto.request.BffCreateOrderRequest;
 import quick.delivery.message.command.CreateOrderItemMessage;
 import quick.delivery.message.command.CreateOrderMessage;
+import quick.delivery.message.command.OrderCommandEvent;
 import quick.delivery.orchestratorservice.application.port.in.SagaStartService;
 import quick.delivery.orchestratorservice.application.port.out.OrderCommandPort;
 import quick.delivery.orchestratorservice.application.port.out.SagaInstancePort;
@@ -29,7 +30,6 @@ public class SagaStartProcessor implements SagaStartService {
         SaveSagaInstanceResult saveSagaInstanceResult = sagaInstancePort.save(dto);
 
         CreateOrderMessage createOrderMessage = CreateOrderMessage.builder()
-                .sagaId(saveSagaInstanceResult.sagaId())
                 .userId(req.userId())
                 .deliveryAddress(req.deliveryAddress())
                 .deliveryMessage(req.deliveryMessage())
@@ -44,7 +44,13 @@ public class SagaStartProcessor implements SagaStartService {
                         .toList())
                 .build();
 
-        orderCommandPort.sendOrderCommand(createOrderMessage);
+        OrderCommandEvent<CreateOrderMessage> event = OrderCommandEvent.<CreateOrderMessage>builder()
+                .sagaId(saveSagaInstanceResult.sagaId())
+                .payload(createOrderMessage)
+                .commandType(KafkaCommandType.CREATE_ORDER)
+                .build();
+
+        orderCommandPort.sendOrderCommand(event);
 
         return saveSagaInstanceResult.sagaId();
     }

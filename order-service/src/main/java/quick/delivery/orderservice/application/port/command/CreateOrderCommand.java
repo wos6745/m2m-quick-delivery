@@ -7,6 +7,7 @@ import quick.delivery.orderservice.domain.Order;
 import java.util.List;
 
 public record CreateOrderCommand(
+        Long sagaId,
         String userId,
         String storeMessage,
         String deliveryAddress,

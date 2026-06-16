@@ -1,7 +1,8 @@
 package quick.delivery.orchestratorservice.application.port.out;
 
 import quick.delivery.message.command.CreateOrderMessage;
+import quick.delivery.message.command.OrderCommandEvent;
 
 public interface OrderCommandPort {
-    void sendOrderCommand(CreateOrderMessage message);
+    <T> void sendOrderCommand(OrderCommandEvent<T> message);
 }

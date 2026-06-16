@@ -17,6 +17,11 @@ public interface Supports {
         }
     }
 
+    enum KafkaCommandType {
+        CREATE_ORDER
+    }
+
+
     enum SagaProcessStatus {
         INITIATED(100),
         COMPLETED(200);

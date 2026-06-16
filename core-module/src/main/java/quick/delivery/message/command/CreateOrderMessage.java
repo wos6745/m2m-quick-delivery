@@ -1,11 +1,11 @@
 package quick.delivery.message.command;
 
 import lombok.Builder;
+import quick.delivery.common.Supports.KafkaCommandType;
 
 import java.util.List;
 
 public record CreateOrderMessage(
-        Long sagaId,
         String userId,
         String storeMessage,
         String deliveryAddress,

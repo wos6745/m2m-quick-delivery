@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import quick.delivery.annotation.ProducerAdapter;
 import quick.delivery.message.command.CreateOrderMessage;
+import quick.delivery.message.command.OrderCommandEvent;
 import quick.delivery.orchestratorservice.application.port.out.OrderCommandPort;
 
 @ProducerAdapter
@@ -15,10 +16,10 @@ public class OrderCommandProducerAdapter implements OrderCommandPort {
 
     @Value("${app.kafka.topic.order-commands}")
     private final String topic;
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaTemplate<Long, Object> kafkaTemplate;
 
     @Override
-    public void sendOrderCommand(CreateOrderMessage message) {
+    public <T> void sendOrderCommand(OrderCommandEvent<T> message) {
 
         kafkaTemplate.send(topic, message.sagaId(), message)
                 .whenComplete((result, ex) -> {

@@ -45,3 +45,10 @@ spring:
 
 server:
   port: 8083
+
+app:
+  kafka:
+    topics:
+      orchestrator-order: order-commands
+    groups:
+      order-service: order-saga-group

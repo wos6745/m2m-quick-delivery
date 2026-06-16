@@ -8,6 +8,7 @@ import quick.delivery.common.Supports;
 import quick.delivery.common.event.OrderCreatedEvent;
 import quick.delivery.common.event.OrderCreatedEvent.OrderItemEventDto;
 import quick.delivery.exception.OrderCreateException;
+import quick.delivery.message.reply.CreateOrderReply;
 import quick.delivery.orderservice.application.port.command.CreateOrderCommand;
 import quick.delivery.orderservice.application.port.command.CreateOrderItemCommand;
 import quick.delivery.orderservice.application.port.command.SaveOrderCommand;
@@ -33,7 +34,7 @@ class OrderService implements CreateOrderUseCase {
 
     @Override
     @Transactional
-    public CreateOrderResponse createOrder(CreateOrderCommand command) {
+    public void createOrder(CreateOrderCommand command) {
         Order order = command.toEntity();
         order.validateCreateOrder();
 
@@ -52,23 +53,13 @@ class OrderService implements CreateOrderUseCase {
         createOrderItemUseCase.createOrderItem(orderItemCommand);
         
         // 카프카 통신
-        OrderCreatedEvent event = OrderCreatedEvent.builder()
-                .orderId(saveOrderResponse.orderId().toString())
-                .userId(command.userId())
-                .totalPoints(command.totalPoints())
-                .orderItems(command.orderItems().stream().map(item ->
-                        OrderItemEventDto.builder()
-                                .menuId(item.menuId())
-                                .count(item.count())
-                                .price(item.price())
-                                .build()
-                ).toList())
-                .build();
-
-        orderEventPort.sendOrderCreatedEvent(event);
-
-        return CreateOrderResponse.builder()
+        CreateOrderReply reply = CreateOrderReply.builder()
                 .orderId(saveOrderResponse.orderId())
+                .sagaId(command.sagaId())
+                .status(true)
+                .message("")
                 .build();
+
+        orderEventPort.sendOrderCreatedEvent(reply);
     }
 }
