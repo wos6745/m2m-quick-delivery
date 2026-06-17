@@ -1,18 +1,21 @@
 package quick.delivery.orderservice.application.port.command;
 
 import lombok.Builder;
+import quick.delivery.common.Supports;
+import quick.delivery.common.Supports.KafkaCommandType;
 import quick.delivery.orderservice.application.port.dto.CreateOrderItemDto;
 import quick.delivery.orderservice.domain.Order;
 
 import java.util.List;
 
 public record CreateOrderCommand(
-        Long sagaId,
+        String sagaId,
         String userId,
         String storeMessage,
         String deliveryAddress,
         String deliveryMessage,
         Long totalPoints,
+        KafkaCommandType commandType,
         List<CreateOrderItemDto> orderItems
 ) {
     @Builder

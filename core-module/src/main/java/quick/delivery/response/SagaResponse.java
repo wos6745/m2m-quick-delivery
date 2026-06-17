@@ -5,7 +5,7 @@ import lombok.Builder;
 import quick.delivery.common.Supports.*;
 
 public record SagaResponse(
-        Long sagaId,
+        String sagaId,
         int sagaStatus,
         String sagaMessage
 ) {

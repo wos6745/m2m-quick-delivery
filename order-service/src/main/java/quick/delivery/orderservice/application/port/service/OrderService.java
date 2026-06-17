@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 import quick.delivery.common.Supports;
-import quick.delivery.common.event.OrderCreatedEvent;
-import quick.delivery.common.event.OrderCreatedEvent.OrderItemEventDto;
+import quick.delivery.common.Supports.KafkaCommandType;
 import quick.delivery.exception.OrderCreateException;
-import quick.delivery.message.reply.CreateOrderReply;
+import quick.delivery.message.reply.OrderCommandReply;
 import quick.delivery.orderservice.application.port.command.CreateOrderCommand;
 import quick.delivery.orderservice.application.port.command.CreateOrderItemCommand;
 import quick.delivery.orderservice.application.port.command.SaveOrderCommand;
@@ -16,8 +15,6 @@ import quick.delivery.orderservice.application.port.in.CreateOrderItemUseCase;
 import quick.delivery.orderservice.application.port.in.CreateOrderUseCase;
 import quick.delivery.orderservice.application.port.out.OrderEventPort;
 import quick.delivery.orderservice.application.port.out.SaveOrderPort;
-import quick.delivery.orderservice.application.port.response.CreateOrderItemResponse;
-import quick.delivery.orderservice.application.port.response.CreateOrderResponse;
 import quick.delivery.orderservice.application.port.response.SaveOrderResponse;
 import quick.delivery.orderservice.domain.Order;
 import tools.jackson.databind.ObjectMapper;
@@ -53,10 +50,11 @@ class OrderService implements CreateOrderUseCase {
         createOrderItemUseCase.createOrderItem(orderItemCommand);
         
         // 카프카 통신
-        CreateOrderReply reply = CreateOrderReply.builder()
+        OrderCommandReply reply = OrderCommandReply.builder()
                 .orderId(saveOrderResponse.orderId())
                 .sagaId(command.sagaId())
                 .status(true)
+                .commandType(command.commandType())
                 .message("")
                 .build();
 

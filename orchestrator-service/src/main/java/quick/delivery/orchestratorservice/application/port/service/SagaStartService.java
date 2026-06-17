@@ -7,22 +7,26 @@ import quick.delivery.dto.request.BffCreateOrderRequest;
 import quick.delivery.message.command.CreateOrderItemMessage;
 import quick.delivery.message.command.CreateOrderMessage;
 import quick.delivery.message.command.OrderCommandEvent;
-import quick.delivery.orchestratorservice.application.port.in.SagaStartService;
+import quick.delivery.orchestratorservice.application.port.in.SagaStartUseCase;
 import quick.delivery.orchestratorservice.application.port.out.OrderCommandPort;
 import quick.delivery.orchestratorservice.application.port.out.SagaInstancePort;
 import quick.delivery.orchestratorservice.common.dto.SaveSagaInstanceDto;
 import quick.delivery.orchestratorservice.common.result.SaveSagaInstanceResult;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
-public class SagaStartProcessor implements SagaStartService {
+class SagaStartService implements SagaStartUseCase {
     private final SagaInstancePort sagaInstancePort;
     private final OrderCommandPort orderCommandPort;
 
     @Override
-    public Long initiateOrderSaga(BffCreateOrderRequest req) {
+    public String initiateOrderSaga(BffCreateOrderRequest req) {
+        String sagaId = UUID.randomUUID().toString();
 
         SaveSagaInstanceDto dto = SaveSagaInstanceDto.builder()
+                .sagaId(sagaId)
                 .sagaStatus(SagaProcessStatus.INITIATED)
                 .orderId(0L)
                 .build();

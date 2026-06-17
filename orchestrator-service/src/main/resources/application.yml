@@ -18,8 +18,9 @@ server:
 
 app:
   kafka:
-    topic:
-      order-commands: order-commands
+    topics:
+      orchestrator-order: orchestrator.order.command
+      order-orchestrator-reply: order.orchestrator.reply
     groups:
-      order-service: order-saga-group
+      orchestrator: orchestrator-group
 

@@ -14,9 +14,9 @@ import quick.delivery.orchestratorservice.application.port.out.OrderCommandPort;
 @Slf4j
 public class OrderCommandProducerAdapter implements OrderCommandPort {
 
-    @Value("${app.kafka.topic.order-commands}")
+    @Value("${app.kafka.topics.orchestrator-order}")
     private final String topic;
-    private final KafkaTemplate<Long, Object> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Override
     public <T> void sendOrderCommand(OrderCommandEvent<T> message) {

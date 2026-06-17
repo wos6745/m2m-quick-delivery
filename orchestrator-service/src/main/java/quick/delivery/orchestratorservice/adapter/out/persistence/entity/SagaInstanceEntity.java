@@ -12,7 +12,9 @@ import quick.delivery.common.Supports.SagaStatus;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "saga_instance")
+@Table(name = "saga_instance",indexes = {
+        @Index(name = "idx_orders_saga_id", columnList = "sagaId")
+})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SagaInstanceEntity {
@@ -20,6 +22,8 @@ public class SagaInstanceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(36)")
+    private String sagaId;
     private Long orderId;
     @Enumerated(EnumType.STRING)
     private SagaProcessStatus sagaStatus;
@@ -32,6 +36,11 @@ public class SagaInstanceEntity {
     public SagaInstanceEntity(Long orderId, SagaProcessStatus sagaStatus) {
         this.orderId = orderId;
         this.sagaStatus = sagaStatus;
+    }
+
+    public void updateStatusAndOrderId(SagaProcessStatus sagaStatus, Long orderId) {
+        this.sagaStatus = sagaStatus;
+        this.orderId = orderId;
     }
 
     @PrePersist

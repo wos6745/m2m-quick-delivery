@@ -1,18 +1,15 @@
 package quick.delivery.orchestratorservice.common.dto;
 
 import lombok.Builder;
-import quick.delivery.common.Supports;
 import quick.delivery.common.Supports.SagaProcessStatus;
 import quick.delivery.common.Supports.SagaStatus;
 
-import java.util.UUID;
-
-public record SaveSagaInstanceDto(
+public record UpdateSagaInstanceStatusDto(
         String sagaId,
-        SagaProcessStatus sagaStatus,
-        Long orderId
+        Long orderId,
+        SagaProcessStatus sagaStatus
 ) {
     @Builder
-    public SaveSagaInstanceDto {
+    public UpdateSagaInstanceStatusDto {
     }
 }

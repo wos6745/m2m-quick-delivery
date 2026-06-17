@@ -40,6 +40,7 @@ public class CreateOrderCommandHandler implements OrderCommandHandler<CreateOrde
                 .storeMessage(message.storeMessage())
                 .totalPoints(message.totalPoints())
                 .orderItems(createOrderItemDtoList)
+                .commandType(getCommandType())
                 .build();
 
         createOrderUseCase.createOrder(command);

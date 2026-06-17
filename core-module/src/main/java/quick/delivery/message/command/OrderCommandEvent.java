@@ -4,7 +4,7 @@ import lombok.Builder;
 import quick.delivery.common.Supports.KafkaCommandType;
 
 public record OrderCommandEvent<T>(
-        Long sagaId,
+        String sagaId,
         KafkaCommandType commandType,
         T payload
 ) {

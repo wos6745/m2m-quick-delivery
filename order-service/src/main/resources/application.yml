@@ -49,6 +49,7 @@ server:
 app:
   kafka:
     topics:
-      orchestrator-order: order-commands
+      orchestrator-order: orchestrator.order.command
+      order-orchestrator-reply: order.orchestrator.reply
     groups:
-      order-service: order-saga-group
+      order-service: order-service-group

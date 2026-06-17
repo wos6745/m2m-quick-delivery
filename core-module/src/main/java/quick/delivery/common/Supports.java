@@ -5,6 +5,7 @@ import lombok.Getter;
 public interface Supports {
     enum SagaStatus {
         INITIATED(100, "예약 접수 중 입니다."),
+        WAIT_PAYMENT(110, "결재 대기중입니다."),
         COMPLETED(200, "예약이 완료 되었습니다.");
         @Getter
         private final int code;
@@ -24,7 +25,10 @@ public interface Supports {
 
     enum SagaProcessStatus {
         INITIATED(100),
-        COMPLETED(200);
+        WAIT_PAYMENT(110),
+        COMPLETED(200),
+        ORDER_CREATE_FAIL(9000);
+
         @Getter
         private final int code;
 
