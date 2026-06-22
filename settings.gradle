@@ -11,4 +11,5 @@ include 'order-service'
 include 'core-module'
 include 'orchestrator-service'
 include 'bff-service'
+include 'payment-service'
 

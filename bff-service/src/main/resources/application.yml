@@ -1,3 +1,10 @@
+springdoc:
+  swagger-ui:
+    try-it-out-enabled: true
+    default-model-expand-depth: 2
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
 spring:
   application:
     name: bff-service

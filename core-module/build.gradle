@@ -11,10 +11,10 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    compileOnly 'org.springdoc:springdoc-openapi-starter-webmvc-ui'
+    compileOnly 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui'
 }
 
 test {
@@ -27,4 +27,8 @@ bootJar {
 
 jar {
     enabled = true
+}
+
+tasks.register('wrapper') {
+    // 내용은 비워둡니다.
 }

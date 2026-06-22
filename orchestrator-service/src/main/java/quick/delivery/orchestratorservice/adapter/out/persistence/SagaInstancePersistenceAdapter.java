@@ -21,6 +21,7 @@ public class SagaInstancePersistenceAdapter implements SagaInstancePort {
     @Override
     public SaveSagaInstanceResult save(SaveSagaInstanceDto dto) {
         SagaInstanceEntity e = SagaInstanceEntity.builder()
+                .sagaId(dto.sagaId())
                 .sagaStatus(dto.sagaStatus())
                 .orderId(dto.orderId())
                 .build();

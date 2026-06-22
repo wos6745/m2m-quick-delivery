@@ -1,6 +1,7 @@
 package quck.delivery.bffservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import static quick.delivery.common.Supports.ResultCode.*;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class BffOrderController {
     private final OrchestratorClient orchestratorClient;
 
@@ -23,6 +25,7 @@ public class BffOrderController {
         SagaResponse sagaResponse = orchestratorClient.startOrderSaga(req);
 
         return CommonResponse.<SagaResponse>builder()
+                .success(true)
                 .code(SUCCESS.getCode())
                 .message(SUCCESS.getInfoMessage())
                 .data(sagaResponse)

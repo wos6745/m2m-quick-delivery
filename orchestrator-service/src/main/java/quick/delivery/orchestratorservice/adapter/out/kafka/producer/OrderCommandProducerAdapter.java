@@ -1,22 +1,25 @@
 package quick.delivery.orchestratorservice.adapter.out.kafka.producer;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import quick.delivery.annotation.ProducerAdapter;
-import quick.delivery.message.command.CreateOrderMessage;
 import quick.delivery.message.command.OrderCommandEvent;
 import quick.delivery.orchestratorservice.application.port.out.OrderCommandPort;
 
 @ProducerAdapter
-@RequiredArgsConstructor
 @Slf4j
 public class OrderCommandProducerAdapter implements OrderCommandPort {
 
-    @Value("${app.kafka.topics.orchestrator-order}")
     private final String topic;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    public OrderCommandProducerAdapter(
+            @Value("${app.kafka.topics.orchestrator-order}") String topic,
+            KafkaTemplate<String, Object> kafkaTemplate) {
+        this.topic = topic;
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     @Override
     public <T> void sendOrderCommand(OrderCommandEvent<T> message) {

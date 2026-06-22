@@ -33,7 +33,8 @@ public class SagaInstanceEntity {
 
 
     @Builder
-    public SagaInstanceEntity(Long orderId, SagaProcessStatus sagaStatus) {
+    public SagaInstanceEntity(String sagaId, Long orderId, SagaProcessStatus sagaStatus) {
+        this.sagaId = sagaId;
         this.orderId = orderId;
         this.sagaStatus = sagaStatus;
     }
