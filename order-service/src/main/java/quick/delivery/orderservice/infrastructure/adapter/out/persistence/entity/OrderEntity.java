@@ -14,18 +14,19 @@ import quick.delivery.orderservice.infrastructure.adapter.out.persistence.entity
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "Order")
 @Getter
 @SuperBuilder
+@Table(name = "Order", indexes = @Index(name = "idx_order_id", columnList = "orderId", unique = true))
 public class OrderEntity extends JpaBaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private Long orderId;
+    private String orderId;
     private String userId;
     private String deliveryAddress;
     private String deliveryMessage;
@@ -40,6 +41,7 @@ public class OrderEntity extends JpaBaseTimeEntity {
 
     public static OrderEntity convertSaveEntity(SaveOrderCommand command) {
         return OrderEntity.builder()
+                .orderId(UUID.randomUUID().toString())
                 .userId(command.userId())
                 .deliveryAddress(command.deliveryAddress())
                 .deliveryMessage(command.deliveryMessage())

@@ -19,9 +19,15 @@ public interface Supports {
     }
 
     enum KafkaCommandType {
-        CREATE_ORDER
+        CREATE_ORDER,
+        CREATE_PAYMENT
     }
 
+    enum PaymentStatus {
+        WAIT_PAYMENT,
+        COMPLETE_PAYMENT,
+        CANCEL_PAYMENT
+    }
 
     enum SagaProcessStatus {
         INITIATED(100),
@@ -75,10 +81,12 @@ public interface Supports {
 
     @Getter
     enum ErrorCode {
-        ORDER_CREATE_VALIDATION_FAIL(10000, "validation fail"),
-        ORDER_ITEM_CREATE_VALIDATION_FAIL(10001, "validation fail"),
+        ORDER_CREATE_VALIDATION_FAIL(10000, "order validation fail"),
+        ORDER_ITEM_CREATE_VALIDATION_FAIL(10001, "order_item validation fail"),
         ORDER_ENTITY_SAVE_FAIL(10002, "order entity save fail"),
-        ORDER_ITEM_ENTITY_SAVE_FAIL(10003, "order item entity save fail");
+        ORDER_ITEM_ENTITY_SAVE_FAIL(10003, "order item entity save fail"),
+        PAYMENT_CREATE_VALIDATION_FAIL(20000, "payment validation fail");
+
         private final int code;
         private final String errorMessage;
 

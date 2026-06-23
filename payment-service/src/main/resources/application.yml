@@ -14,15 +14,13 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
-  port: 8082
+  port: 8084
 
 app:
   kafka:
     topics:
-      orchestrator-order: orchestrator.order.command
-      order-orchestrator-reply: order.orchestrator.reply
-      orchestrator-payment: orchestrator.payment.command
-      payment-orchestrator-reply: payment.orchestrator.reply
+      orchestrator-order: orchestrator.payment.command
+      order-orchestrator-reply: payment.orchestrator.reply
     groups:
       orchestrator: orchestrator-group
 

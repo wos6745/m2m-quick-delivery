@@ -1,7 +1,7 @@
 package quick.delivery.orderservice.domain;
 
 import lombok.Builder;
-import quick.delivery.exception.OrderItemCreateException;
+import quick.delivery.exception.CreateOrderItemException;
 
 import static quick.delivery.common.Supports.ErrorCode.ORDER_ITEM_CREATE_VALIDATION_FAIL;
 
@@ -22,14 +22,11 @@ public class OrderItem {
     }
 
     public void validateCreateOrderItem() {
-        if (price == null) {
-            throw new OrderItemCreateException(ORDER_ITEM_CREATE_VALIDATION_FAIL, "price is null");
-        }
         if (count == 0) {
-            throw new OrderItemCreateException(ORDER_ITEM_CREATE_VALIDATION_FAIL, "count is zero");
+            throw new CreateOrderItemException(ORDER_ITEM_CREATE_VALIDATION_FAIL, "count is zero");
         }
         if (menuId == null) {
-            throw new OrderItemCreateException(ORDER_ITEM_CREATE_VALIDATION_FAIL, "menuId is null");
+            throw new CreateOrderItemException(ORDER_ITEM_CREATE_VALIDATION_FAIL, "menuId is null");
         }
     }
 }

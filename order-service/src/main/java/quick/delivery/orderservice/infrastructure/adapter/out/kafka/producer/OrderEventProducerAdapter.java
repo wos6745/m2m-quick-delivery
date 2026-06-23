@@ -1,11 +1,10 @@
 package quick.delivery.orderservice.infrastructure.adapter.out.kafka.producer;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import quick.delivery.annotation.ProducerAdapter;
-import quick.delivery.message.reply.OrderCommandReply;
+import quick.delivery.message.reply.order.OrderCommandReply;
 import quick.delivery.orderservice.application.port.out.OrderEventPort;
 
 @ProducerAdapter

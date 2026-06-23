@@ -6,7 +6,7 @@ import quick.delivery.common.Supports.SagaStatus;
 
 public record UpdateSagaInstanceStatusDto(
         String sagaId,
-        Long orderId,
+        String orderId,
         SagaProcessStatus sagaStatus
 ) {
     @Builder

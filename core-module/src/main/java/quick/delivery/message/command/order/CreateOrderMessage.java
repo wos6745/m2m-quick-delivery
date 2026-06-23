@@ -1,7 +1,6 @@
-package quick.delivery.message.command;
+package quick.delivery.message.command.order;
 
 import lombok.Builder;
-import quick.delivery.common.Supports.KafkaCommandType;
 
 import java.util.List;
 

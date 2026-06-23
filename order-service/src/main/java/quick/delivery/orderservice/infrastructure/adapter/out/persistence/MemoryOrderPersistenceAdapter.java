@@ -20,7 +20,7 @@ public class MemoryOrderPersistenceAdapter implements SaveOrderPort {
         OrderEntity savedOrderEntity = orderJpaRepository.save(orderEntity);
 
         return SaveOrderResponse.builder()
-                .orderId(savedOrderEntity.getId())
+                .orderId(savedOrderEntity.getOrderId())
                 .isSuccess(true)
                 .build();
     }

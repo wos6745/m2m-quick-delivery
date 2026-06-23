@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import quick.delivery.annotation.ConsumerAdapter;
 import quick.delivery.common.Supports.KafkaCommandType;
-import quick.delivery.message.command.CreateOrderMessage;
-import quick.delivery.message.command.OrderCommandEvent;
+import quick.delivery.message.command.order.CreateOrderMessage;
+import quick.delivery.message.command.order.OrderCommandEvent;
 import quick.delivery.orderservice.infrastructure.adapter.in.kafka.factory.OrderCommandHandlerFactory;
 import quick.delivery.orderservice.infrastructure.adapter.in.kafka.handler.OrderCommandHandler;
 

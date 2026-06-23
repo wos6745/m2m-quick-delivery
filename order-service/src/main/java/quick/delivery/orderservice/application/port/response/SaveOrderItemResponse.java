@@ -4,7 +4,7 @@ import lombok.Builder;
 
 public record SaveOrderItemResponse(
         boolean isSuccess,
-        Long orderItemId
+        String orderItemId
 ) {
     @Builder
     public SaveOrderItemResponse {

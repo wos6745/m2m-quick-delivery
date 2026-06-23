@@ -2,7 +2,7 @@ package quick.delivery.orderservice.application.port.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import quick.delivery.exception.OrderItemCreateException;
+import quick.delivery.exception.CreateOrderItemException;
 import quick.delivery.orderservice.application.port.command.CreateOrderItemCommand;
 import quick.delivery.orderservice.application.port.command.SaveOrderItemCommand;
 import quick.delivery.orderservice.application.port.in.CreateOrderItemUseCase;
@@ -36,7 +36,7 @@ class OrderItemService implements CreateOrderItemUseCase {
 
             if (!saveOrderItemResponse.isSuccess()) {
                 String jsonPayload = objectMapper.writeValueAsString(x);
-                throw new OrderItemCreateException(ORDER_ITEM_ENTITY_SAVE_FAIL, jsonPayload);
+                throw new CreateOrderItemException(ORDER_ITEM_ENTITY_SAVE_FAIL, jsonPayload);
             }
 
             orderItemIds.add(saveOrderItemCommand.menuId());

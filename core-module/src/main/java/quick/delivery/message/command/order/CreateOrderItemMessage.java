@@ -1,4 +1,4 @@
-package quick.delivery.message.command;
+package quick.delivery.message.command.order;
 
 import lombok.Builder;
 

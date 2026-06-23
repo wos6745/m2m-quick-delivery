@@ -3,7 +3,7 @@ package quick.delivery.orchestratorservice.adapter.in.kafka.consumer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import quick.delivery.annotation.ConsumerAdapter;
-import quick.delivery.message.reply.OrderCommandReply;
+import quick.delivery.message.reply.order.OrderCommandReply;
 import quick.delivery.orchestratorservice.adapter.in.kafka.consumer.factory.OrderReplyHandlerFactory;
 import quick.delivery.orchestratorservice.adapter.in.kafka.consumer.handler.OrderReplyHandler;
 

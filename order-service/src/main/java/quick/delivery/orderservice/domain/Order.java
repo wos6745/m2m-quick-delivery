@@ -4,7 +4,7 @@ package quick.delivery.orderservice.domain;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import quick.delivery.common.Supports.OrderStatus;
-import quick.delivery.exception.OrderCreateException;
+import quick.delivery.exception.CreateOrderException;
 
 import java.util.List;
 
@@ -37,19 +37,17 @@ public class Order {
         this.totalPoints = totalPoints;
     }
 
-    public void validateCreateOrder() throws OrderCreateException {
+    public void validateCreateOrder() {
         if (userId == null || userId.isBlank()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "userId is required");
+            throw new CreateOrderException(ORDER_CREATE_VALIDATION_FAIL, "userId is required");
         }
 
         if (deliveryAddress == null || deliveryAddress.isBlank()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "deliveryAddress is required");
+            throw new CreateOrderException(ORDER_CREATE_VALIDATION_FAIL, "deliveryAddress is required");
         }
-        if (totalPoints == null || totalPoints == 0) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "totalPoints is zero");
-        }
+
         if (orderItems == null || orderItems.isEmpty()) {
-            throw new OrderCreateException(ORDER_CREATE_VALIDATION_FAIL, "orderItems is required");
+            throw new CreateOrderException(ORDER_CREATE_VALIDATION_FAIL, "orderItems is required");
         }
     }
 }

@@ -4,9 +4,8 @@ package quick.delivery.orderservice.infrastructure.adapter.in.kafka.handler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import quick.delivery.common.Supports.KafkaCommandType;
-import quick.delivery.message.command.CreateOrderMessage;
+import quick.delivery.message.command.order.CreateOrderMessage;
 import quick.delivery.orderservice.application.port.command.CreateOrderCommand;
-import quick.delivery.orderservice.application.port.command.CreateOrderItemCommand;
 import quick.delivery.orderservice.application.port.dto.CreateOrderItemDto;
 import quick.delivery.orderservice.application.port.in.CreateOrderUseCase;
 

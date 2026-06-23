@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
-import quick.delivery.common.Supports;
-import quick.delivery.common.Supports.KafkaCommandType;
-import quick.delivery.exception.OrderCreateException;
-import quick.delivery.message.reply.OrderCommandReply;
+import quick.delivery.exception.CreateOrderException;
+import quick.delivery.message.reply.order.OrderCommandReply;
 import quick.delivery.orderservice.application.port.command.CreateOrderCommand;
 import quick.delivery.orderservice.application.port.command.CreateOrderItemCommand;
 import quick.delivery.orderservice.application.port.command.SaveOrderCommand;
@@ -40,7 +38,7 @@ class OrderService implements CreateOrderUseCase {
 
         if (!saveOrderResponse.isSuccess()) {
             String jsonPayload = objectMapper.writeValueAsString(command);
-            throw new OrderCreateException(ORDER_ENTITY_SAVE_FAIL, jsonPayload);
+            throw new CreateOrderException(ORDER_ENTITY_SAVE_FAIL, jsonPayload);
         }
 
         CreateOrderItemCommand orderItemCommand = CreateOrderItemCommand.builder()
@@ -54,7 +52,9 @@ class OrderService implements CreateOrderUseCase {
                 .orderId(saveOrderResponse.orderId())
                 .sagaId(command.sagaId())
                 .status(true)
+                .totalPoints(command.totalPoints())
                 .commandType(command.commandType())
+                .userId(command.userId())
                 .message("")
                 .build();
 
