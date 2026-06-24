@@ -85,7 +85,8 @@ public interface Supports {
         ORDER_ITEM_CREATE_VALIDATION_FAIL(10001, "order_item validation fail"),
         ORDER_ENTITY_SAVE_FAIL(10002, "order entity save fail"),
         ORDER_ITEM_ENTITY_SAVE_FAIL(10003, "order item entity save fail"),
-        PAYMENT_CREATE_VALIDATION_FAIL(20000, "payment validation fail");
+        PAYMENT_CREATE_VALIDATION_FAIL(20000, "payment validation fail"),
+        PAYMENT_ENTITY_SAVE_FAIL(20002, "payment entity save fail");
 
         private final int code;
         private final String errorMessage;

@@ -1,7 +1,6 @@
 package quick.delivery.orderservice.application.port.command;
 
 import lombok.Builder;
-import quick.delivery.common.Supports;
 import quick.delivery.common.Supports.KafkaCommandType;
 import quick.delivery.orderservice.application.port.dto.CreateOrderItemDto;
 import quick.delivery.orderservice.domain.Order;
@@ -33,7 +32,7 @@ public record CreateOrderCommand(
                 .build();
     }
 
-    public SaveOrderCommand toCommand() {
+    public SaveOrderCommand toSaveCommand() {
         return SaveOrderCommand.builder()
                 .userId(userId)
                 .storeMessage(storeMessage)

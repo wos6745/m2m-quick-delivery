@@ -19,8 +19,8 @@ server:
 app:
   kafka:
     topics:
-      orchestrator-order: orchestrator.payment.command
-      order-orchestrator-reply: payment.orchestrator.reply
+      orchestrator-payment: orchestrator.payment.command
+      payment-orchestrator-reply: payment.orchestrator.reply
     groups:
-      orchestrator: orchestrator-group
+      payment-service: payment-service-group
 

@@ -6,7 +6,7 @@ import quick.delivery.exception.CreateOrderItemException;
 import quick.delivery.orderservice.application.port.command.CreateOrderItemCommand;
 import quick.delivery.orderservice.application.port.command.SaveOrderItemCommand;
 import quick.delivery.orderservice.application.port.in.CreateOrderItemUseCase;
-import quick.delivery.orderservice.application.port.out.SaveOrderItemPort;
+import quick.delivery.orderservice.application.port.out.OrderItemCommandPort;
 import quick.delivery.orderservice.application.port.response.CreateOrderItemResponse;
 import quick.delivery.orderservice.application.port.response.SaveOrderItemResponse;
 import quick.delivery.orderservice.domain.OrderItem;
@@ -20,7 +20,7 @@ import static quick.delivery.common.Supports.ErrorCode.ORDER_ITEM_ENTITY_SAVE_FA
 @Service
 @RequiredArgsConstructor
 class OrderItemService implements CreateOrderItemUseCase {
-    private final SaveOrderItemPort saveOrderItemPort;
+    private final OrderItemCommandPort saveOrderItemPort;
     private final ObjectMapper objectMapper;
 
     @Override

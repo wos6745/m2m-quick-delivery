@@ -27,6 +27,7 @@ public class OrderEventConsumerAdapter {
     private Class<?> resolvePayloadType(KafkaCommandType commandType) {
         return switch (commandType) {
             case CREATE_ORDER -> CreateOrderMessage.class;
+            case CREATE_PAYMENT -> null;
         };
     }
 }

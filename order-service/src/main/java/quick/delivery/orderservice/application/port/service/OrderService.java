@@ -12,7 +12,7 @@ import quick.delivery.orderservice.application.port.command.SaveOrderCommand;
 import quick.delivery.orderservice.application.port.in.CreateOrderItemUseCase;
 import quick.delivery.orderservice.application.port.in.CreateOrderUseCase;
 import quick.delivery.orderservice.application.port.out.OrderEventPort;
-import quick.delivery.orderservice.application.port.out.SaveOrderPort;
+import quick.delivery.orderservice.application.port.out.OrderCommandPort;
 import quick.delivery.orderservice.application.port.response.SaveOrderResponse;
 import quick.delivery.orderservice.domain.Order;
 import tools.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ import static quick.delivery.common.Supports.ErrorCode.*;
 @RequiredArgsConstructor
 class OrderService implements CreateOrderUseCase {
     private final CreateOrderItemUseCase createOrderItemUseCase;
-    private final SaveOrderPort saveOrderPort;
+    private final OrderCommandPort saveOrderPort;
     private final OrderEventPort orderEventPort;
     private final ObjectMapper objectMapper;
 
@@ -33,7 +33,7 @@ class OrderService implements CreateOrderUseCase {
         Order order = command.toEntity();
         order.validateCreateOrder();
 
-        SaveOrderCommand saveOrderCommand = command.toCommand();
+        SaveOrderCommand saveOrderCommand = command.toSaveCommand();
         SaveOrderResponse saveOrderResponse = saveOrderPort.saveOrder(saveOrderCommand);
 
         if (!saveOrderResponse.isSuccess()) {

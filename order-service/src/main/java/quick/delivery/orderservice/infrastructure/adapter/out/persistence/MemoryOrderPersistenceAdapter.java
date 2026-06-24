@@ -3,15 +3,14 @@ package quick.delivery.orderservice.infrastructure.adapter.out.persistence;
 import lombok.RequiredArgsConstructor;
 import quick.delivery.annotation.PersistenceAdapter;
 import quick.delivery.orderservice.application.port.command.SaveOrderCommand;
-import quick.delivery.orderservice.application.port.out.SaveOrderPort;
+import quick.delivery.orderservice.application.port.out.OrderCommandPort;
 import quick.delivery.orderservice.application.port.response.SaveOrderResponse;
-import quick.delivery.orderservice.domain.Order;
 import quick.delivery.orderservice.infrastructure.adapter.out.persistence.entity.OrderEntity;
 import quick.delivery.orderservice.infrastructure.adapter.out.persistence.jpa.OrderJpaRepository;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class MemoryOrderPersistenceAdapter implements SaveOrderPort {
+public class MemoryOrderPersistenceAdapter implements OrderCommandPort {
     private final OrderJpaRepository orderJpaRepository;
 
     @Override
